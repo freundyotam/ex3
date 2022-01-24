@@ -36,21 +36,26 @@ def parse_file(filename):
 
 def find_best_selling_product(file_name):
     cur_best_selling = ('', 0)
-    for name, item_data in parse_file(file_name).items():
-            if item_data['profit'] > cur_best_selling[1]:
-                cur_best_selling = (name, item_data['profit'])
-    
+    try:
+        for name, item_data in parse_file(file_name).items():
+                if item_data['profit'] > cur_best_selling[1]:
+                    cur_best_selling = (name, item_data['profit'])
+
+    except:
+        pass
     return cur_best_selling
     
 
 def find_k_most_expensive_products(file_name, k):
-    items = sorted(parse_file(file_name).items())
-    price_sorted_items = sorted(items, key= lambda kv: kv[1]['price'], reverse= True)
     result_list = []
-    for i in range(k):
-        try:
-            result_list.append(price_sorted_items[i][0])
-        except:
-            pass
-
+    try:
+        items = sorted(parse_file(file_name).items())
+        price_sorted_items = sorted(items, key= lambda kv: kv[1]['price'], reverse= True)
+        for i in range(k):
+            try:
+                result_list.append(price_sorted_items[i][0])
+            except:
+                pass
+    except:
+        pass
     return result_list
