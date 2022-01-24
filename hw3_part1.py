@@ -6,10 +6,11 @@ def parse_file(filename):
     lines = file.read().splitlines()
     for line in lines:
         args = line.split()
-
         if (args[0] == 'add'):
-            if args[2] not in inventory.keys():
-                inventory[args[2]] = {'price': float(args[3]), 'amount': float(args[4]),'profit': 0}
+            price = float(args[3])
+            amount = float(args[4])
+            if args[2] not in inventory.keys() and price >= 0 and amount >= 0:
+                inventory[args[2]] = {'price': price, 'amount': amount,'profit': 0}
 
         elif(args[0] == 'change'):
             try:
