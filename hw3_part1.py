@@ -12,7 +12,10 @@ def parse_file(filename):
                 inventory[args[2]] = {'price': float(args[3]), 'amount': float(args[4]),'profit': 0}
 
         elif(args[0] == 'change'):
-            inventory[args[2]]['amount'] += float(args[3])
+            try:
+                inventory[args[2]]['amount'] += float(args[3])
+            except:
+                pass
 
         elif(args[0] == 'ship'):
             item_string = line[11:]
