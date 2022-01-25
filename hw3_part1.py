@@ -26,7 +26,7 @@ def parse_file(filename):
                 item = item_pair.split(', ')
                 try:
                     item_amount = float(item[1])
-                    if inventory[item[0]]['amount'] >= item_amount:
+                    if inventory[item[0]]['amount'] >= item_amount and item_amount >= 0:
                         inventory[item[0]]['profit'] += inventory[item[0]]['price']*item_amount
                         inventory[item[0]]['amount'] -= item_amount
                 except:
@@ -41,10 +41,9 @@ def parse_file(filename):
 def find_best_selling_product(file_name):
     cur_best_selling = ('', 0)
     try:
-        for name, item_data in parse_file(file_name).items():
-                if item_data['profit'] > cur_best_selling[1]:
-                    cur_best_selling = (name, item_data['profit'])
-
+        for name, item_data in sorted(parse_file(file_name).items()):
+            if item_data['profit'] > cur_best_selling[1] or cur_best_selling[0] == '':
+                cur_best_selling = (name, item_data['profit'])
     except:
         pass
     return cur_best_selling
