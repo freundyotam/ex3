@@ -26,7 +26,7 @@ def parse_file(filename):
                 item = item_pair.split(', ')
                 try:
                     item_amount = float(item[1])
-                    if inventory[item[0]]['amount'] >= item_amount:
+                    if inventory[item[0]]['amount'] >= item_amount and item_amount >= 0:
                         inventory[item[0]]['profit'] += inventory[item[0]]['price']*item_amount
                         inventory[item[0]]['amount'] -= item_amount
                 except:
