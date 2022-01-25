@@ -41,10 +41,9 @@ def parse_file(filename):
 def find_best_selling_product(file_name):
     cur_best_selling = ('', 0)
     try:
-        for name, item_data in parse_file(file_name).items():
-                if item_data['profit'] > cur_best_selling[1]:
-                    cur_best_selling = (name, item_data['profit'])
-
+        for name, item_data in sorted(parse_file(file_name).items()):
+            if item_data['profit'] > cur_best_selling[1] or cur_best_selling[0] == '':
+                cur_best_selling = (name, item_data['profit'])
     except:
         pass
     return cur_best_selling
